@@ -1,3 +1,6 @@
+# lib manipulation array
+import numpy as np
+
 # lib neural network algorithms
 import tensorflow as tf
 from keras.layers import LSTM
@@ -59,3 +62,23 @@ def get_prediction(model, batch_size, epochs, x_train, y_train, x_test, y_test):
   # return values
   return history, predictions
 # ----------------------------------------------------------------------------------------
+
+# func model predictions
+def get_XGBoost(xtrue, ytrue, ypred):
+
+  # 1. calculate residuals
+  residuals = ytrue - ypred[:, 0]
+
+  # 2. xgboost model on residuals
+  xgb_model = XGBRegressor(objective='reg:squarederror')
+
+  # 3. fitting models
+  xgb_model.fit(np.vstack(xtrue), residuals)
+
+  # 4. predict models
+  predictions = xgb_model.predict(np.vstack(xtrue))
+
+  # 5. Combine LSTM and XGBoost predictions
+  xgb_predictions = ypred[:, 0] + predictions
+
+  return xgb_predictions
