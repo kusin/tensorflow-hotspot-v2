@@ -112,16 +112,20 @@ def process_multivariate_supervised(data, n_in=1, n_out=1, dropnan=True):
 # function for supervised learning
 def results_multivariate_supervised(scaled):
   
-  # set supervised learning
+  # 1. set supervised learning
   scaled = process_multivariate_supervised(scaled, 1, 1)
   scaled.drop(scaled.columns[[5,6,7]], axis=1, inplace=True)
 
-  # process splittings
+  # 2. process splittings
   train_data, test_data = splitting(scaled.values)
 
-  # split x and y 
+  # 3. split x and y 
   x_train, y_train = train_data[:, :-1], train_data[:, -1]
   x_test, y_test = test_data[:, :-1], test_data[:, -1]
+
+  # 4. reshape data train
+  x_train = np.reshape(np.array(x_train), (x_train.shape[0], 1, x_train.shape[1]))
+  x_test = np.reshape(np.array(x_test), (x_test.shape[0], 1, x_test.shape[1]))
 
   # return values
   return x_train, y_train, x_test, y_test
