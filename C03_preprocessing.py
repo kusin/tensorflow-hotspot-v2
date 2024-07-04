@@ -20,6 +20,12 @@ def normalized(dataset, features):
   return scaler, scaled
 # ----------------------------------------------------------------------------------------
 
+# function for inverse normalized
+def inverse(scaler, scaled):
+  hasil = scaler.inverse_transform(scaled)
+  return hasil
+# ----------------------------------------------------------------------------------------
+
 # func for splitting data
 def splitting(scaled):
 
@@ -59,15 +65,15 @@ def results_univariate_supervised(train_data, test_data):
    
   # set time series lag
   look_back = 1
-  
+
   # process supervised learning
   x_train, y_train = process_univariate_supervised(look_back, train_data)
   x_test, y_test = process_univariate_supervised(look_back, test_data)
-
+  
   # reshape input to be [samples, time steps, features]
   x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
   x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
-   
+
   # return values
   return x_train, y_train, x_test, y_test
 # ----------------------------------------------------------------------------------------
