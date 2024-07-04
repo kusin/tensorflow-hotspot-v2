@@ -34,7 +34,7 @@ def get_models(algorithm, timestep, activation, optimizer, dropout):
     ])
   
   # 2. compile models
-  model.compile(optimizer=optimizer, loss="mae")
+  model.compile(optimizer=optimizer,loss="mae")
 
   # return values
   return model
