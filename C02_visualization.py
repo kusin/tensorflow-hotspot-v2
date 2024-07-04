@@ -13,7 +13,7 @@ def lineplot1(x, y, label, title):
   ax.set_title(title, fontsize=12)
   ax.set_xlabel("", fontsize=12)
   ax.set_ylabel("", fontsize=12)
-  ax.legend(loc="upper left")
+  ax.legend(loc="best")
   ax.grid(True)
 
   # return values
@@ -33,7 +33,7 @@ def lineplot2(x1, y1, label1, x2, y2, label2, title):
   ax.set_title(title, fontsize=12)
   ax.set_xlabel("", fontsize=12)
   ax.set_ylabel("", fontsize=12)
-  ax.legend(loc="upper left")
+  ax.legend(loc="best")
   ax.grid(True)
 
   # return values
