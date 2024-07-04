@@ -78,7 +78,7 @@ def get_XGBoost(xtrue, ytrue, ypred):
   # 4. predict models
   predictions = xgb_model.predict(np.vstack(xtrue))
 
-  # 5. Combine LSTM and XGBoost predictions
+  # 5. Combine Model with XGBoost predictions
   xgb_predictions = ypred[:, 0] + predictions
 
   return xgb_predictions
