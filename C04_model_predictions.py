@@ -31,7 +31,7 @@ def get_models(algorithm, timestep, activation, optimizer, dropout):
     ])
   
   # 2. compile models
-  model.compile(optimizer=optimizer, loss="mean_squared_error")
+  model.compile(optimizer=optimizer, loss="mae")
 
   # return values
   return model
