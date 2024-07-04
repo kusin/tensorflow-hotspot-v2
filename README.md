@@ -1,1 +1,1 @@
-# tensorflow-hotspot-v2
+# Model prediksi titik panas menggunakan metode SBi-LSTM-XGBoost dan SBi-GRU-XGBoost
