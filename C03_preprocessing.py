@@ -69,10 +69,59 @@ def results_univariate_supervised(train_data, test_data):
   # process supervised learning
   x_train, y_train = process_univariate_supervised(look_back, train_data)
   x_test, y_test = process_univariate_supervised(look_back, test_data)
-  
+
   # reshape input to be [samples, time steps, features]
   x_train = np.reshape(x_train, (x_train.shape[0], x_train.shape[1], 1))
   x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
+
+  # return values
+  return x_train, y_train, x_test, y_test
+# ----------------------------------------------------------------------------------------
+
+# function for supervised learning
+def process_multivariate_supervised(data, n_in=1, n_out=1, dropnan=True):
+  
+  n_vars = 1 if type(data) is list else data.shape[1]
+  df = pd.DataFrame(data)
+  cols, names = list(), list()
+    
+  # 1. input sequence (t-n, ... t-1)
+  for i in range(n_in, 0, -1):
+    cols.append(df.shift(i))
+    names += [('var%d(t-%d)' % (j+1, i)) for j in range(n_vars)]
+    
+  # 2. forecast sequence (t, t+1, ... t+n)
+  for i in range(0, n_out):
+    cols.append(df.shift(-i))
+    if i == 0:
+      names += [('var%d(t)' % (j+1)) for j in range(n_vars)]
+    else:
+      names += [('var%d(t+%d)' % (j+1, i)) for j in range(n_vars)]
+    
+  # 3. put it all together
+  agg = pd.concat(cols, axis=1)
+  agg.columns = names
+  
+  # 4. drop rows with NaN values
+  if dropnan:
+      agg.dropna(inplace=True)
+  
+  # return value
+  return agg
+
+# function for supervised learning
+def results_multivariate_supervised(scaled):
+  
+  # set supervised learning
+  scaled = process_multivariate_supervised(scaled, 1, 1)
+  scaled.drop(scaled.columns[[5,6,7]], axis=1, inplace=True)
+
+  # process splittings
+  train_data, test_data = splitting(scaled.values)
+
+  # split x and y 
+  x_train, y_train = train_data[:, :-1], train_data[:, -1]
+  x_test, y_test = test_data[:, :-1], test_data[:, -1]
 
   # return values
   return x_train, y_train, x_test, y_test
