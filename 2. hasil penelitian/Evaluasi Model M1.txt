@@ -1,4 +1,15 @@
-Run 1 - Evaluate Models with SBi-LSTM
+-----------------------------
+Run 1 -----------------------
+-----------------------------
+Evaluate Models with SBi-LSTM
+-----------------------------
+R       : 0,6452
+P-value : 0,0
+MAE     : 0,0341
+RMSE    : 0,0956
+MAPE    : 0,0568
+
+Evaluate Models with SBi-LSTM
 -----------------------------
 R       : 0,6452
 P-value : 0,0
@@ -6,7 +17,15 @@ MAE     : 246,121
 RMSE    : 689,805
 MAPE    : 167,86
 
-Run 1 - Evaluate Models with SBi-LSTM-XGBoost
+Evaluate Models with SBi-LSTM-XGBoost
+-------------------------------------
+R       : 0,9999
+P-value : 0,0
+MAE     : 0,0015
+RMSE    : 0,002
+MAPE    : 0,0016
+
+Evaluate Models with SBi-LSTM-XGBoost
 -------------------------------------
 R       : 0,9999
 P-value : 0,0
@@ -14,7 +33,15 @@ MAE     : 10,6457
 RMSE    : 14,0773
 MAPE    : 0,4678
 
-Run 1 - Evaluate Models with SBi-GRU
+Evaluate Models with SBi-GRU
+----------------------------
+R       : 0,6449
+P-value : 0,0
+MAE     : 0,0357
+RMSE    : 0,0986
+MAPE    : 0,0602
+
+Evaluate Models with SBi-GRU
 ----------------------------
 R       : 0,6449
 P-value : 0,0
@@ -22,7 +49,15 @@ MAE     : 257,3752
 RMSE    : 711,3548
 MAPE    : 153,96
 
-Run 1 - Evaluate Models with SBi-GRU-XGBoost
+Evaluate Models with SBi-GRU-XGBoost
+------------------------------------
+R       : 0,9999
+P-value : 0,0
+MAE     : 0,0015
+RMSE    : 0,0020
+MAPE    : 0,0016
+
+Evaluate Models with SBi-GRU-XGBoost
 ------------------------------------
 R       : 0,9999
 P-value : 0,0
