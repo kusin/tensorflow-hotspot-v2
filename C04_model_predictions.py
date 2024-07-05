@@ -11,7 +11,7 @@ from xgboost import XGBRegressor
 # ----------------------------------------------------------------------------------------
 
 # func model predictions
-def get_models(algorithm, timestep, activation, optimizer, dropout):
+def get_models_univariate(algorithm, timestep, activation, optimizer, dropout):
 
   # 1. The LSTM architecture
   if algorithm == "SBi-LSTM":
@@ -35,6 +35,47 @@ def get_models(algorithm, timestep, activation, optimizer, dropout):
   
   # 2. compile models
   model.compile(optimizer=optimizer,loss="mae")
+
+  # return values
+  return model
+# ----------------------------------------------------------------------------------------
+
+# func model predictions
+def get_models_multivariate(algorithm, timestep, activation, optimizer, dropout):
+
+  # 1. The LSTM architecture
+  if algorithm == "SBi-LSTM":
+    tf.keras.backend.clear_session()
+    model = tf.keras.Sequential([
+      tf.keras.layers.Bidirectional(LSTM(units=10, activation=activation, return_sequences=True, input_shape=(timestep.shape[1], 1))),
+      tf.keras.layers.Bidirectional(LSTM(units=10, activation=activation, return_sequences=True)),
+      tf.keras.layers.Bidirectional(LSTM(units=10, activation=activation, return_sequences=False)),
+      tf.keras.layers.Dropout(dropout),
+      tf.keras.layers.Dense(1)
+    ])
+  
+  # 1. The GRU-RNN architecture
+  if algorithm == "SBi-GRU":
+    tf.keras.backend.clear_session()
+    model = tf.keras.Sequential([
+      tf.keras.layers.Bidirectional(GRU(units=10, activation=activation, return_sequences=True, input_shape=(timestep.shape[1], 1))),
+      tf.keras.layers.Bidirectional(GRU(units=10, activation=activation, return_sequences=True)),
+      tf.keras.layers.Bidirectional(GRU(units=10, activation=activation, return_sequences=False)),
+      tf.keras.layers.Dropout(dropout),
+      tf.keras.layers.Dense(1)
+    ])
+  
+  # 2. compile models
+  model.compile(
+    optimizer=optimizer,
+    #loss="mean_squared_error",
+    loss="mae",
+    metrics=[
+      tf.keras.metrics.MeanAbsoluteError(),
+      tf.keras.metrics.MeanSquaredError(),
+      tf.keras.metrics.MeanAbsolutePercentageError(),
+    ]
+  )
 
   # return values
   return model
@@ -82,3 +123,4 @@ def get_XGBoost(xtrue, ytrue, ypred):
   xgb_predictions = ypred[:, 0] + predictions
 
   return xgb_predictions
+# ----------------------------------------------------------------------------------------

@@ -18,7 +18,7 @@ def get_models(algorithm, timestep, activation, optimizer, dropout):
     tf.keras.backend.clear_session()
     model = tf.keras.Sequential([
       tf.keras.layers.Bidirectional(LSTM(units=10, activation=activation, return_sequences=True, input_shape=(timestep.shape[1], 1))),
-      tf.keras.layers.Bidirectional(LSTM(units=10, activation=activation, return_sequences=True)),
+      #tf.keras.layers.Bidirectional(LSTM(units=10, activation=activation, return_sequences=True)),
       tf.keras.layers.Bidirectional(LSTM(units=10, activation=activation, return_sequences=False)),
       tf.keras.layers.Dropout(dropout),
       tf.keras.layers.Dense(1)
@@ -29,7 +29,7 @@ def get_models(algorithm, timestep, activation, optimizer, dropout):
     tf.keras.backend.clear_session()
     model = tf.keras.Sequential([
       tf.keras.layers.Bidirectional(GRU(units=10, activation=activation, return_sequences=True, input_shape=(timestep.shape[1], 1))),
-      tf.keras.layers.Bidirectional(GRU(units=10, activation=activation, return_sequences=True)),
+      #tf.keras.layers.Bidirectional(GRU(units=10, activation=activation, return_sequences=True)),
       tf.keras.layers.Bidirectional(GRU(units=10, activation=activation, return_sequences=False)),
       tf.keras.layers.Dropout(dropout),
       tf.keras.layers.Dense(1)
@@ -39,11 +39,11 @@ def get_models(algorithm, timestep, activation, optimizer, dropout):
   model.compile(
     optimizer=optimizer,
     loss="mae",
-    # metrics=[
-    #   tf.keras.metrics.MeanAbsoluteError(),
-    #   tf.keras.metrics.MeanSquaredError(),
-    #   tf.keras.metrics.MeanAbsolutePercentageError(),
-    # ]
+    metrics=[
+      tf.keras.metrics.MeanAbsoluteError(),
+      tf.keras.metrics.MeanSquaredError(),
+      tf.keras.metrics.MeanAbsolutePercentageError(),
+    ]
   )
 
   # return values
