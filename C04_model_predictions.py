@@ -68,7 +68,6 @@ def get_models_multivariate(algorithm, timestep, activation, optimizer, dropout)
   # 2. compile models
   model.compile(
     optimizer=optimizer,
-    #loss="mean_squared_error",
     loss="mae",
     metrics=[
       tf.keras.metrics.MeanAbsoluteError(),
