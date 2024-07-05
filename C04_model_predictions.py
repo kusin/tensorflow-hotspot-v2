@@ -17,8 +17,9 @@ def get_models_univariate(algorithm, timestep, activation, optimizer, dropout):
   if algorithm == "SBi-LSTM":
     tf.keras.backend.clear_session()
     model = tf.keras.Sequential([
-      tf.keras.layers.Bidirectional(LSTM(units=50, activation=activation, return_sequences=True, input_shape=(timestep.shape[1], 1))),
-      tf.keras.layers.Bidirectional(LSTM(units=50, activation=activation, return_sequences=False)),
+      tf.keras.layers.Bidirectional(LSTM(units=10, activation=activation, return_sequences=True, input_shape=(timestep.shape[1], 1))),
+      tf.keras.layers.Bidirectional(LSTM(units=10, activation=activation, return_sequences=True)),
+      tf.keras.layers.Bidirectional(LSTM(units=10, activation=activation, return_sequences=False)),
       tf.keras.layers.Dropout(dropout),
       tf.keras.layers.Dense(1)
     ])
@@ -27,8 +28,9 @@ def get_models_univariate(algorithm, timestep, activation, optimizer, dropout):
   if algorithm == "SBi-GRU":
     tf.keras.backend.clear_session()
     model = tf.keras.Sequential([
-      tf.keras.layers.Bidirectional(GRU(units=50, activation=activation, return_sequences=True, input_shape=(timestep.shape[1], 1))),
-      tf.keras.layers.Bidirectional(GRU(units=50, activation=activation, return_sequences=False)),
+      tf.keras.layers.Bidirectional(GRU(units=10, activation=activation, return_sequences=True, input_shape=(timestep.shape[1], 1))),
+      tf.keras.layers.Bidirectional(GRU(units=10, activation=activation, return_sequences=True)),
+      tf.keras.layers.Bidirectional(GRU(units=10, activation=activation, return_sequences=False)),
       tf.keras.layers.Dropout(dropout),
       tf.keras.layers.Dense(1)
     ])
@@ -69,11 +71,11 @@ def get_models_multivariate(algorithm, timestep, activation, optimizer, dropout)
   model.compile(
     optimizer=optimizer,
     loss="mae",
-    metrics=[
-      tf.keras.metrics.MeanAbsoluteError(),
-      tf.keras.metrics.MeanSquaredError(),
-      tf.keras.metrics.MeanAbsolutePercentageError(),
-    ]
+    # metrics=[
+    #   tf.keras.metrics.MeanAbsoluteError(),
+    #   tf.keras.metrics.MeanSquaredError(),
+    #   tf.keras.metrics.MeanAbsolutePercentageError(),
+    # ]
   )
 
   # return values
