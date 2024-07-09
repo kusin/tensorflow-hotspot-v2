@@ -36,7 +36,15 @@ def get_models(algorithm, timestep, activation, optimizer, dropout):
     ])
   
   # 2. compile models
-  model.compile(optimizer=optimizer,loss="mae")
+  model.compile(
+    optimizer=optimizer,
+    loss="mae",
+    metrics=[
+      tf.keras.metrics.MeanAbsoluteError(),
+      tf.keras.metrics.MeanSquaredError(),
+      tf.keras.metrics.MeanAbsolutePercentageError(),
+    ]
+  )
 
   # return values
   return model
