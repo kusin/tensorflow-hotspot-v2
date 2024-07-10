@@ -1,5 +1,9 @@
 ### Model prediksi titik panas menggunakan metode SBi-LSTM-XGBoost dan SBi-GRU-XGBoost
 
+Tools Anaconda-Navigator 2023.09
+- Conda         = 24.5.0
+- Python        = 3.11.9
+
 Lib manipulasi data
 - Numpy         = 1.26.4
 - Pandas        = 2.2.2
