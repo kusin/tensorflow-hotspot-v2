@@ -1,6 +1,6 @@
 ### Model prediksi titik panas menggunakan metode SBi-LSTM-XGBoost dan SBi-GRU-XGBoost
 
-Sumber Data
+Sumber Data Penelitian
 
 - Titik panas (https://firms.modaps.eosdis.nasa.gov/download)
 - SST Nino 3.4 (https://www.cpc.ncep.noaa.gov/data/indices/sstoi.indices)
